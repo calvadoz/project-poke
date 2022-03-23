@@ -1,16 +1,15 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import classes from "./App.module.css";
 import Pokeball from "./components/Pokeball";
 
 function App() {
+  const apiUrl = process.env.REACT_APP_HEROKU_PROJECT_URL;
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
 
   const catchButtonHandler = async () => {
-    const catchPokemonReq = await fetch(
-      "http://localhost:8000/api/catchem-all-10"
-    );
+    const catchPokemonReq = await fetch(`${apiUrl}api/catchem-all-10`);
     const result = await catchPokemonReq.json();
     setSummoningState("done");
     setTimeout(() => {
@@ -27,7 +26,7 @@ function App() {
           allPokemons.map((pokemon) => (
             <li key={pokemon.id}>
               <img
-                src={`http://localhost:8000/static/gen-1/${pokemon.name}.png`}
+                src={`${apiUrl}static/gen-1/${pokemon.name}.png`}
                 alt="pokemon-img"
               />
               <span className={classes["pokemon-name"]}>{pokemon.name}</span>
