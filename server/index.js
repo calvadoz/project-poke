@@ -4,25 +4,13 @@ const express = require("express");
 const app = express();
 const morgan = require("morgan");
 const cors = require("cors");
+const { uuid } = require("uuidv4");
 
 const PORT = process.env.SERVER_PORT || 2000;
 const corsOptions = {
   origin: "http://localhost:3000",
   optionsSuccessStatus: 200, // For legacy browser support
 };
-
-const dummy_data = [
-  {
-    id: 1,
-    name: "bulbasaur",
-    img: "http://localhost:8000/static/gen-1/bulbasaur.png",
-  },
-  {
-    id: 2,
-    name: "ivysaur",
-    img: "http://localhost:8000/static/gen-1/ivysaur.png",
-  },
-];
 
 app.use(express.json());
 app.use("/static", express.static("assets"));
@@ -41,8 +29,31 @@ app.get("/api/healthcheck", (req, res) => {
   res.send("Service is healthy");
 });
 
-app.get("/api/all-pokemons", (req, res) => {
-  res.send(dummy_data);
+app.get("/api/all-pokemons-gen1", async (req, res) => {
+  const api_url = process.env.POKEMON_API_URL + "?limit=151";
+  const pokemons = await axios.get(api_url);
+  const results = pokemons.data.results;
+  res.send(results);
 });
+
+app.get("/api/catchem-all-10", async (req, res) => {
+  const api_url = process.env.POKEMON_API_URL + "?limit=151";
+  const pokemons = await axios.get(api_url);
+  const results = pokemons.data.results;
+  const randomPokemons = [];
+
+  for (let i = 0; i < 10; i++) {
+    const random = generateRandomNumber(151);
+    const newResult = { ...results[random] };
+    newResult.id = uuid();
+    randomPokemons.push(newResult);
+  }
+  console.log(randomPokemons);
+  res.send(randomPokemons);
+});
+
+function generateRandomNumber(totalPokemons) {
+  return Math.ceil(Math.random() * totalPokemons);
+}
 
 app.listen(PORT, () => console.log("Server is up and running at port", PORT));

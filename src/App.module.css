@@ -1,0 +1,32 @@
+.wrapper {
+  text-align: center;
+}
+li {
+  list-style: none;
+  display: inline-block;
+  width: 33%;
+  /* margin: 0 auto; */
+  margin-bottom: 0.5em;
+}
+
+li > span.pokemon-name {
+  font-size: 18px;
+  display: block;
+  text-transform: capitalize;
+}
+
+.catch-button {
+  width: 200px;
+  height: 40px;
+  margin-top: 10px;
+  border: none;
+  background: maroon;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 250ms ease-out;
+}
+
+.catch-button:hover {
+  background: rgb(105, 0, 0);
+}
