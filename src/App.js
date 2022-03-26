@@ -30,10 +30,13 @@ function App() {
   };
 
   const onOpenSingleHandler = (index) => {
-    console.log("index:", index);
     const showPokemons = [...allPokemons];
     showPokemons[index].isShow = true;
     setAllPokemons(showPokemons);
+  };
+
+  const onViewPokemonDetailsHandler = (pokemonName) => {
+    console.log("Selected Pokemon Name: ", pokemonName);
   };
 
   return (
@@ -42,6 +45,7 @@ function App() {
         onClick={catchButtonHandler}
         onOpenAll={onOpenAllHandler}
         summoningState={summoningState}
+        pokemons={allPokemons}
       />
       <ul>
         {allPokemons.length > 0 &&
@@ -51,6 +55,7 @@ function App() {
               pokemon={pokemon}
               index={index}
               onOpenSingle={onOpenSingleHandler}
+              onViewPokemonDetails={onViewPokemonDetailsHandler}
             />
           ))}
       </ul>

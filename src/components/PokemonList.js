@@ -5,11 +5,16 @@ import classes from "./PokemonList.module.css";
 import PokemonReveal from "./PokemonReveal";
 
 const PokemonList = (props) => {
-  const { pokemon, onOpenSingle, index } = props;
+  const { pokemon, onOpenSingle, index, onViewPokemonDetails } = props;
 
   return (
     <li key={uuidv4()}>
-      {pokemon.isShow && <PokemonReveal pokemon={pokemon} />}
+      {pokemon.isShow && (
+        <PokemonReveal
+          pokemon={pokemon}
+          onViewPokemonDetails={onViewPokemonDetails}
+        />
+      )}
       {!pokemon.isShow && (
         <Pokeball
           rarity={pokemon.rarity}

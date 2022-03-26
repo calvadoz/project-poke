@@ -6,11 +6,14 @@ const PokeballCatch = (props) => {
   const [isSummoning, setIsSummoning] = useState(false);
   const [currSummoningState, setCurrSummoningState] = useState("");
   const [buttonClass, setButtonClass] = useState("");
+  const [flag, setFlag] = useState(true);
   const summonPokemonHandler = () => {
     setIsSummoning(true);
+    setFlag(false); // disable button click
     setTimeout(() => {
       props.onClick();
       setIsSummoning(false);
+      setFlag(true);
     }, 2000);
   };
 
@@ -31,7 +34,7 @@ const PokeballCatch = (props) => {
         viewBox="0 0 100 100"
         width="150"
         height="150"
-        onClick={summonPokemonHandler}
+        onClick={flag ? summonPokemonHandler : null}
         className={buttonClass}
       >
         <g transform="translate(50 50) scale(0.8)">
