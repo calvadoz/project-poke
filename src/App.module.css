@@ -1,32 +1,44 @@
 .wrapper {
   text-align: center;
 }
+
 li {
   list-style: none;
   display: inline-block;
   width: 33%;
   /* margin: 0 auto; */
-  margin-bottom: 0.5em;
+  margin-bottom: 3em;
 }
 
-li > span.pokemon-name {
+@media (min-width: 320px) {
+  li {
+    width: 100% !important;
+  }
+}
+@media (min-width: 961px) {
+  li {
+    width: 50% !important;
+  }
+}
+
+@media (min-width: 1281px) {
+  li {
+    width: 20% !important;
+  }
+}
+
+li > img {
+  width: 40%;
+}
+
+li span.pokemon-name {
   font-size: 18px;
-  display: block;
-  text-transform: capitalize;
 }
 
-.catch-button {
-  width: 200px;
-  height: 40px;
-  margin-top: 10px;
-  border: none;
-  background: maroon;
-  color: white;
-  cursor: pointer;
-  font-size: 20px;
-  transition: all 250ms ease-out;
+li span.pokemon-rarity {
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-left: 0.5rem;
+  font-weight: bold;
 }
 
-.catch-button:hover {
-  background: rgb(105, 0, 0);
-}
