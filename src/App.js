@@ -1,12 +1,15 @@
-import "./App.css";
 import React, { useState } from "react";
 import classes from "./App.module.css";
-import Pokeball from "./components/Pokeball";
+import PokeballCatch from "./components/PokeballCatch";
+import PokemonList from "./components/PokemonList";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  // const apiUrl = process.env.REACT_APP_HEROKU_PROJECT_URL;
-  const apiUrl = process.env.REACT_APP_LOCAL_PROJECT_URL;
+  const apiUrl =
+    process.env.NODE_ENV === "production"
+      ? process.env.REACT_APP_HEROKU_PROJECT_URL
+      : process.env.REACT_APP_LOCAL_PROJECT_URL;
+
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
 
@@ -20,29 +23,35 @@ function App() {
     }, 1000);
   };
 
+  const onOpenAllHandler = () => {
+    const showAllPokemons = [...allPokemons];
+    showAllPokemons.forEach((p) => (p.isShow = true));
+    setAllPokemons(showAllPokemons);
+  };
+
+  const onOpenSingleHandler = (index) => {
+    console.log("index:", index);
+    const showPokemons = [...allPokemons];
+    showPokemons[index].isShow = true;
+    setAllPokemons(showPokemons);
+  };
+
   return (
     <div className={classes.wrapper}>
-      <Pokeball onClick={catchButtonHandler} summoningState={summoningState} />
+      <PokeballCatch
+        onClick={catchButtonHandler}
+        onOpenAll={onOpenAllHandler}
+        summoningState={summoningState}
+      />
       <ul>
         {allPokemons.length > 0 &&
-          allPokemons.map((pokemon) => (
-            <li key={uuidv4()}>
-              <img
-                src={`${apiUrl}static/${pokemon.name}.png`}
-                alt="pokemon-img"
-              />
-              <div>
-                <span
-                  style={{ textTransform: "capitalize" }}
-                  className={classes["pokemon-name"]}
-                >
-                  {pokemon.name}
-                </span>
-                <span className={classes["pokemon-rarity"]}>
-                  {pokemon.rarity}
-                </span>
-              </div>
-            </li>
+          allPokemons.map((pokemon, index) => (
+            <PokemonList
+              key={uuidv4()}
+              pokemon={pokemon}
+              index={index}
+              onOpenSingle={onOpenSingleHandler}
+            />
           ))}
       </ul>
     </div>
