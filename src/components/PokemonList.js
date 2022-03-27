@@ -1,7 +1,6 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 import Pokeball from "./Pokeball";
-import classes from "./PokemonList.module.css";
 import PokemonReveal from "./PokemonReveal";
 
 const PokemonList = (props) => {

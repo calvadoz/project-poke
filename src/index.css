@@ -20,7 +20,33 @@ img.imageList {
   width: 40%;
 }
 
-li span.pokemon-rarity {
+span.pokemon-name {
+  font-size: 20px;
+  font-weight: bold;
+  color: #ededed;
+  position: relative;
+  padding: 0.4em 0.8em;
+  top: 8px;
+  border-radius: 20px;
+}
+
+span.pokemon-name.pokemon-rarity-r {
+  background: #5a5a5a;
+}
+
+span.pokemon-name.pokemon-rarity-sr {
+  background: #3888f0;
+}
+
+span.pokemon-name.pokemon-rarity-ssr {
+  background: #e97828;
+}
+
+span.pokemon-name.pokemon-rarity-ur {
+  background: #603b89;
+}
+
+span.pokemon-rarity {
   font-size: 24px;
   text-transform: uppercase;
   margin-left: 0.5rem;
@@ -37,19 +63,19 @@ li span.pokemon-rarity {
   border-radius: 50%;
 }
 
-li span.pokemon-rarity-r {
+span.pokemon-rarity.pokemon-rarity-r {
   background: #d33f59;
 }
 
-li span.pokemon-rarity-sr {
+span.pokemon-rarity.pokemon-rarity-sr {
   background: #3888f0;
 }
 
-li span.pokemon-rarity-ssr {
+span.pokemon-rarity.pokemon-rarity-ssr {
   background: #fed823;
 }
 
-li span.pokemon-rarity-ur {
+span.pokemon-rarity.pokemon-rarity-ur {
   background: #603b89;
 }
 
@@ -64,7 +90,7 @@ li span.pokemon-rarity-ur {
   animation-name: fadeInOpacity;
   animation-iteration-count: 1;
   animation-timing-function: ease-in;
-  animation-duration: .5s;
+  animation-duration: 0.5s;
   z-index: 999999999;
 }
 
@@ -75,7 +101,6 @@ li span.pokemon-rarity-ur {
 .whitebox-ur {
   background: #603b89;
 }
-
 
 @keyframes fadeInOpacity {
   0% {

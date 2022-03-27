@@ -12,15 +12,29 @@ function App() {
 
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
+  const [sparks, setSparks] = useState("");
 
   const catchButtonHandler = async () => {
     const catchPokemonReq = await fetch(`${apiUrl}api/catchem-all-multi`);
     const result = await catchPokemonReq.json();
     setSummoningState("done");
+    setOverlay(result);
     setTimeout(() => {
       setAllPokemons(result);
       setSummoningState("clear");
-    }, 1000);
+    }, 4000);
+  };
+
+  const setOverlay = (result) => {
+    if (result.filter((r) => r.rarity === "UR").length > 0) {
+      setSparks("hasUR");
+    } else if (result.filter((r) => r.rarity === "SSR").length > 0) {
+      setSparks("hasSSR");
+    } else if (result.filter((r) => r.rarity === "SR").length > 0) {
+      setSparks("hasSR");
+    } else {
+      setSparks(null);
+    }
   };
 
   const onOpenAllHandler = () => {
@@ -39,13 +53,19 @@ function App() {
     console.log("Selected Pokemon Name: ", pokemonName);
   };
 
+  const onBeforeClickHandler = () => {
+    setAllPokemons([]);
+  };
+
   return (
     <div className={classes.wrapper}>
       <PokeballCatch
         onClick={catchButtonHandler}
         onOpenAll={onOpenAllHandler}
+        onBeforeClick={onBeforeClickHandler}
         summoningState={summoningState}
         pokemons={allPokemons}
+        sparks={sparks}
       />
       <ul>
         {allPokemons.length > 0 &&

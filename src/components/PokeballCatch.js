@@ -1,13 +1,15 @@
 import classes from "./PokeballCatch.module.css";
 import { useState, useEffect } from "react";
+import SummonOverlay from "./SummonOverlay";
 
 const PokeballCatch = (props) => {
-  const { summoningState, onOpenAll } = props;
+  const { summoningState, onOpenAll, onBeforeClick, sparks, pokemons } = props;
   const [isSummoning, setIsSummoning] = useState(false);
   const [currSummoningState, setCurrSummoningState] = useState("");
   const [buttonClass, setButtonClass] = useState("");
   const [flag, setFlag] = useState(true);
   const summonPokemonHandler = () => {
+    onBeforeClick();
     setIsSummoning(true);
     setFlag(false); // disable button click
     setTimeout(() => {
@@ -22,14 +24,23 @@ const PokeballCatch = (props) => {
     let classNames = "";
     classNames += isSummoning ? classes.fetching : "";
     setButtonClass(classNames);
-  }, [summoningState, isSummoning]);
+  }, [summoningState, isSummoning, sparks]);
+
+  let summonOverlayClass = "";
+  if (currSummoningState === "done" && sparks === null) {
+    summonOverlayClass = <SummonOverlay sparks={sparks} />;
+  } else if (currSummoningState === "done" && sparks === "hasUR") {
+    summonOverlayClass = <SummonOverlay sparks={sparks} />;
+  } else if (currSummoningState === "done" && sparks === "hasSSR") {
+    summonOverlayClass = <SummonOverlay sparks={sparks} />;
+  } else if (currSummoningState === "done" && sparks === "hasSR") {
+    summonOverlayClass = <SummonOverlay sparks={sparks} />;
+  }
 
   return (
     <div>
-      <div
-        id="whitebox"
-        className={currSummoningState === "done" ? classes.whitebox : ""}
-      ></div>
+      {/* <div id="whitebox" className={summonOverlayClass}></div> */}
+      <div id="whitebox">{summonOverlayClass}</div>
       <svg
         viewBox="0 0 100 100"
         width="150"
@@ -113,7 +124,7 @@ const PokeballCatch = (props) => {
           </g>
         </g>
       </svg>
-      {summoningState === "clear" && (
+      {summoningState === "clear" && pokemons.length > 0 && (
         <div className={classes["open-all"]}>
           <button onClick={onOpenAll}>Open All</button>
         </div>

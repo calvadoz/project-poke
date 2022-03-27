@@ -1,5 +1,4 @@
 import React from "react";
-import classes from "./PokemonReveal.module.css";
 
 const PokemonReveal = (props) => {
   const { pokemon, onViewPokemonDetails } = props;
@@ -21,17 +20,14 @@ const PokemonReveal = (props) => {
         alt="pokemon-img"
       />
       <div>
-        <span
-          style={{ textTransform: "capitalize" }}
-          className={classes["pokemon-name"]}
-        >
+        <span style={{ textTransform: "capitalize" }} className={`pokemon-name pokemon-rarity-${pokemon.rarity.toLowerCase()}`}>
           {pokemon.name}
         </span>
-        <span
+        {/* <span
           className={`pokemon-rarity pokemon-rarity-${pokemon.rarity.toLowerCase()}`}
         >
           {pokemon.rarity}
-        </span>
+        </span> */}
       </div>
     </React.Fragment>
   );
