@@ -3,7 +3,7 @@ import React from "react";
 const PokemonReveal = (props) => {
   const { pokemon, onViewPokemonDetails } = props;
   const apiUrl =
-    process.env.NODE_ENV === "production"
+    process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
       : process.env.REACT_APP_LOCAL_PROJECT_URL;
 
