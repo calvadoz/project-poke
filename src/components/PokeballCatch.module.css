@@ -13,34 +13,11 @@ body {
   background: #ccc;
 }
 
-.whitebox {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: #f5f5f2;
-  opacity: 1;
-  animation-name: fadeInOpacity;
-  animation-iteration-count: 1;
-  animation-timing-function: ease-in;
-  animation-duration: 0.5s;
-  z-index: 999999999;
-}
 
-@keyframes fadeInOpacity {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 
 svg {
   cursor: pointer;
   position: relative;
-  top: -100px;
 }
 
 svg:hover {
@@ -145,7 +122,6 @@ svg.failure g.center {
 
 div.open-all {
   position: relative;
-  top: -70px;
 }
 
 div.open-all button {
