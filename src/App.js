@@ -13,8 +13,10 @@ function App() {
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
   const [sparks, setSparks] = useState("");
+  const [enableButtonClick, setEnableButtonClick] = useState(true);
 
   const catchButtonHandler = async () => {
+    setSummoningState("summoning");
     const catchPokemonReq = await fetch(`${apiUrl}api/catchem-all-multi`);
     const result = await catchPokemonReq.json();
     setSummoningState("done");
@@ -22,6 +24,7 @@ function App() {
     setTimeout(() => {
       setAllPokemons(result);
       setSummoningState("clear");
+      setEnableButtonClick(true);
     }, 4000);
   };
 
@@ -55,6 +58,7 @@ function App() {
 
   const onBeforeClickHandler = () => {
     setAllPokemons([]);
+    setEnableButtonClick(false);
   };
 
   return (
@@ -66,6 +70,7 @@ function App() {
         summoningState={summoningState}
         pokemons={allPokemons}
         sparks={sparks}
+        flag={enableButtonClick}
       />
       <ul>
         {allPokemons.length > 0 &&

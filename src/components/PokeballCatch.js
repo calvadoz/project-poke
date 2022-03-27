@@ -3,20 +3,17 @@ import { useState, useEffect } from "react";
 import SummonOverlay from "./SummonOverlay";
 
 const PokeballCatch = (props) => {
-  const { summoningState, onOpenAll, onBeforeClick, sparks, pokemons } = props;
+  const { summoningState, onOpenAll, onBeforeClick, sparks, pokemons, flag } = props;
   const [isSummoning, setIsSummoning] = useState(false);
   const [currSummoningState, setCurrSummoningState] = useState("");
   const [buttonClass, setButtonClass] = useState("");
-  const [flag, setFlag] = useState(true);
   const summonPokemonHandler = () => {
     onBeforeClick();
     setIsSummoning(true);
-    setFlag(false); // disable button click
     setTimeout(() => {
       props.onClick();
       setIsSummoning(false);
-      setFlag(true);
-    }, 2000);
+    }, 3000);
   };
 
   useEffect(() => {
