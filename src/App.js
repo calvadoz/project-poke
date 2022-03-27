@@ -9,7 +9,6 @@ function App() {
     process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
       : process.env.REACT_APP_LOCAL_PROJECT_URL;
-  console.log(process.env.REACT_APP_ENVIRONMENT);
 
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
