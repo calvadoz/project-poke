@@ -9,6 +9,7 @@ function App() {
     process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
       : process.env.REACT_APP_LOCAL_PROJECT_URL;
+  console.log(process.env.REACT_APP_ENVIRONMENT + apiUrl);
 
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
@@ -41,15 +42,19 @@ function App() {
   };
 
   const onOpenAllHandler = () => {
-    const showAllPokemons = [...allPokemons];
-    showAllPokemons.forEach((p) => (p.isShow = true));
-    setAllPokemons(showAllPokemons);
+    setAllPokemons((prevState) => {
+      const showPokemons = [...prevState];
+      showPokemons.forEach((p) => (p.isShow = true));
+      return showPokemons;
+    });
   };
 
   const onOpenSingleHandler = (index) => {
-    const showPokemons = [...allPokemons];
-    showPokemons[index].isShow = true;
-    setAllPokemons(showPokemons);
+    setAllPokemons((prevState) => {
+      const showPokemons = [...prevState];
+      showPokemons[index].isShow = true;
+      return showPokemons;
+    });
   };
 
   const onViewPokemonDetailsHandler = (pokemonName) => {
