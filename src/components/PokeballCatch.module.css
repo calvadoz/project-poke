@@ -13,14 +13,12 @@ body {
   background: #ccc;
 }
 
-
-
 svg {
   cursor: pointer;
   position: relative;
 }
 
-svg:hover {
+/* svg:hover {
   animation: enlarge 1s infinite;
 }
 
@@ -31,7 +29,7 @@ svg:hover {
   100% {
     transform: scale(1.3);
   }
-}
+} */
 
 /* POKEBALL ANIMATIONS */
 /* shake to rotate g.gravity */

@@ -1,9 +1,11 @@
 import classes from "./PokeballCatch.module.css";
 import { useState, useEffect } from "react";
 import SummonOverlay from "./SummonOverlay";
+import { motion } from "framer-motion";
 
 const PokeballCatch = (props) => {
-  const { summoningState, onOpenAll, onBeforeClick, sparks, pokemons, flag } = props;
+  const { summoningState, onOpenAll, onBeforeClick, sparks, pokemons, flag } =
+    props;
   const [isSummoning, setIsSummoning] = useState(false);
   const [currSummoningState, setCurrSummoningState] = useState("");
   const [buttonClass, setButtonClass] = useState("");
@@ -38,7 +40,8 @@ const PokeballCatch = (props) => {
     <div>
       {/* <div id="whitebox" className={summonOverlayClass}></div> */}
       <div id="whitebox">{summonOverlayClass}</div>
-      <svg
+      <motion.svg
+        whileHover={{ scale: 1.2 }}
         viewBox="0 0 100 100"
         width="150"
         height="150"
@@ -120,7 +123,7 @@ const PokeballCatch = (props) => {
             </g>
           </g>
         </g>
-      </svg>
+      </motion.svg>
       {summoningState === "clear" && pokemons.length > 0 && (
         <div className={classes["open-all"]}>
           <button onClick={onOpenAll}>Open All</button>
