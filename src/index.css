@@ -1,3 +1,4 @@
+@import-normalize;
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -35,15 +36,15 @@ span.pokemon-name.pokemon-rarity-r {
 }
 
 span.pokemon-name.pokemon-rarity-sr {
-  background: #3888f0;
+  background: #4c61c2;
 }
 
 span.pokemon-name.pokemon-rarity-ssr {
-  background: #e97828;
+  background: #9b3fb8;
 }
 
 span.pokemon-name.pokemon-rarity-ur {
-  background: #603b89;
+  background: #ce484f;
 }
 
 span.pokemon-rarity {
