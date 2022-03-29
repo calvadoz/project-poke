@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import classes from "./App.module.css";
 import PokeballCatch from "./components/PokeballCatch";
 import PokemonList from "./components/PokemonList";
 import { v4 as uuidv4 } from "uuid";
+import SummonOverlay from "./components/SummonOverlay";
 
 function App() {
   const apiUrl =
     process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
       : process.env.REACT_APP_LOCAL_PROJECT_URL;
-  console.log(process.env.REACT_APP_ENVIRONMENT + apiUrl);
 
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
