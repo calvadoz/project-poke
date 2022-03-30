@@ -38,10 +38,9 @@ const PokeballCatch = (props) => {
 
   return (
     <div>
-      {/* <div id="whitebox" className={summonOverlayClass}></div> */}
       <div id="whitebox">{summonOverlayClass}</div>
       <motion.svg
-        whileHover={{ scale: 1.2 }}
+        whileHover={{ scale: 1.2, originX: 0, originY: 0 }}
         viewBox="0 0 100 100"
         width="150"
         height="150"
