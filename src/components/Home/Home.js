@@ -2,8 +2,8 @@ import React, { useState, useEffect, useCallback } from "react";
 import classes from "./Home.module.css";
 import { v4 as uuidv4 } from "uuid";
 import { motion, AnimatePresence } from "framer-motion";
-import PokeballCatch from "../PokeballCatch";
-import PokemonList from "../PokemonList";
+import PokeballCatch from "../PokeballCatch/PokeballCatch";
+import PokemonList from "../PokemonList/PokemonList";
 
 const AsyncImage = (props) => {
   const [loadedSrc, setLoadedSrc] = useState(null);
@@ -32,7 +32,6 @@ function Home() {
     process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
       : process.env.REACT_APP_LOCAL_PROJECT_URL;
-  const [fetchedPokemons, setFetchedPokemons] = useState([]);
   const [allPokemons, setAllPokemons] = useState([]);
   const [summoningState, setSummoningState] = useState("preparing");
   const [sparks, setSparks] = useState("");
