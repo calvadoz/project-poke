@@ -1,4 +1,5 @@
 import React from "react";
+import PokeImage from "./PokeImage";
 
 const PokemonReveal = (props) => {
   const { pokemon, onViewPokemonDetails } = props;
@@ -13,14 +14,17 @@ const PokemonReveal = (props) => {
 
   return (
     <React.Fragment>
-      <img
+      <PokeImage
         onClick={onViewPokemonDetailsHandler}
-        className="imageList"
-        src={`${apiUrl}static/${pokemon.name}.png`}
-        alt="pokemon-img"
+        classes="imageList"
+        imageUrl={`${apiUrl}static/${pokemon.name}.png`}
+        alt="PokemonImage"
       />
       <div>
-        <span style={{ textTransform: "capitalize" }} className={`pokemon-name pokemon-rarity-${pokemon.rarity.toLowerCase()}`}>
+        <span
+          style={{ textTransform: "capitalize" }}
+          className={`pokemon-name pokemon-rarity-${pokemon.rarity.toLowerCase()}`}
+        >
           {pokemon.name}
         </span>
         {/* <span
