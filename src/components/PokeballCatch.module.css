@@ -3,10 +3,9 @@
   padding: 0;
   margin: 0;
 }
-body {
+.pokeball-catch-container {
   min-height: 100vh;
   background: hsl(0, 0%, 100%);
-  /* center in the viewport */
   display: flex;
   justify-content: center;
   align-items: center;

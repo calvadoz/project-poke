@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Pokeball.module.css";
-import { motion, AnimatePresence } from "framer-motion";
+import PokeImage from "./PokeImage";
 
 const Pokeball = (props) => {
   const apiUrl =
@@ -13,69 +13,48 @@ const Pokeball = (props) => {
     onOpenSingle(index);
   };
 
-  const animations = {
-    initial: { scale: 0, opacity: 0 },
-    animate: {
-      scale: 1,
-      opacity: 1,
-      transition: { delay: 0.1 },
-    },
-    exit: { scale: 0, opacity: 0 },
-  };
-
   return (
     <React.Fragment>
-      <AnimatePresence exitBeforeEnter>
-        {rarity === "UR" && (
-          <motion.div
-            {...animations}
-            className={classes["pokeball-wrapper-UR"]}
-          >
-            <motion.img
-              onClick={onOpenSingleHandler}
-              className="imageList"
-              src={`${apiUrl}static/masterball.png`}
-              alt="Masterball"
-            />
-          </motion.div>
-        )}
-        {rarity === "SSR" && (
-          <motion.div
-            {...animations}
-            className={classes["pokeball-wrapper-SSR"]}
-          >
-            <motion.img
-              onClick={onOpenSingleHandler}
-              className="imageList"
-              src={`${apiUrl}static/ultraball.png`}
-              alt="UltraBall"
-            />
-          </motion.div>
-        )}
-        {rarity === "SR" && (
-          <motion.div
-            {...animations}
-            className={classes["pokeball-wrapper-SR"]}
-          >
-            <motion.img
-              onClick={onOpenSingleHandler}
-              className="imageList"
-              src={`${apiUrl}static/greatball.png`}
-              alt="GreatBall"
-            />
-          </motion.div>
-        )}
-        {rarity === "R" && (
-          <motion.div {...animations} className={classes["pokeball-wrapper-R"]}>
-            <motion.img
-              onClick={onOpenSingleHandler}
-              className="imageList"
-              src={`${apiUrl}static/pokeball.png`}
-              alt="PokeBall"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {rarity === "UR" && (
+        <div className={classes["pokeball-wrapper-UR"]}>
+          <PokeImage
+            onClick={onOpenSingleHandler}
+            classes="imageList"
+            imageUrl={`${apiUrl}static/masterball.png`}
+            alt="Masterball"
+          />
+        </div>
+      )}
+      {rarity === "SSR" && (
+        <div className={classes["pokeball-wrapper-SSR"]}>
+          <PokeImage
+            onClick={onOpenSingleHandler}
+            classes="imageList"
+            imageUrl={`${apiUrl}static/ultraball.png`}
+            alt="Ultraball"
+          />
+        </div>
+      )}
+      {rarity === "SR" && (
+        <div className={classes["pokeball-wrapper-SR"]}>
+          <PokeImage
+            onClick={onOpenSingleHandler}
+            classes="imageList"
+            imageUrl={`${apiUrl}static/greatball.png`}
+            alt="Greatball"
+          />
+        </div>
+      )}
+      {rarity === "R" && (
+        <div className={classes["pokeball-wrapper-R"]}>
+          <PokeImage
+            onClick={onOpenSingleHandler}
+            classes="imageList"
+            imageUrl={`${apiUrl}static/pokeball.png`}
+            alt="Pokeball"
+          />
+        </div>
+      )}
     </React.Fragment>
   );
 };
