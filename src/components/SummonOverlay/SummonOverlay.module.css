@@ -3,6 +3,11 @@
   margin: 0 auto;
 }
 
+.container {
+  height: 100vh;
+  z-index: 999999;
+}
+
 .ag-fireflies_box {
   background-color: rgb(7, 7, 7);
 }

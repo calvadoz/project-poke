@@ -1,5 +1,6 @@
 import React from "react";
 import classes from "./SummonOverlay.module.css";
+import { motion } from "framer-motion";
 
 const SummonOverlay = (props) => {
   const { sparks } = props;
@@ -23,7 +24,12 @@ const SummonOverlay = (props) => {
 
   return (
     <React.Fragment>
-      <div className={`${classes["ag-fireflies_box"]}`}>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={`${classes["ag-fireflies_box"]} classes.container`}
+      >
         {particles.map((p, index) => (
           <div key={index} className={classes["ag-fireflies_item"]}>
             <div
@@ -31,7 +37,7 @@ const SummonOverlay = (props) => {
             ></div>
           </div>
         ))}
-      </div>
+      </motion.div>
     </React.Fragment>
   );
 };

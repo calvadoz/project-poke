@@ -3,17 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import PokemonReveal from "./../PokemonReveal/PokemonReveal";
 import classes from "./PokemonList.module.css";
 import { motion } from "framer-motion";
-import Pokeball from './../Pokeball/Pokeball';
-
-const childVariants = {
-  hidden: {
-    opacity: 0,
-  },
-  visible: {
-    opacity: 1,
-    transition: { duration: 2, type: "spring" },
-  },
-};
+import Pokeball from "./../Pokeball/Pokeball";
 
 const PokemonList = (props) => {
   const { pokemon, onOpenSingle, index, onViewPokemonDetails } = props;
@@ -45,7 +35,11 @@ const PokemonList = (props) => {
           animate={{ opacity: 1, translateX: 0, translateY: 0 }}
           transition={{ duration: 1.5, delay: index * 0.15 }}
         >
-          <Pokeball onOpenSingle={onOpenSingle} rarity={pokemon.rarity} index={index} />
+          <Pokeball
+            onOpenSingle={onOpenSingle}
+            rarity={pokemon.rarity}
+            index={index}
+          />
         </motion.li>
       )}
     </React.Fragment>

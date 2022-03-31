@@ -6,11 +6,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-direction: column;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.main-wrapper {
+  height: calc(100vh - 60px);
+  flex: auto;
+  background-color: #ccc;
+  overflow-x: hidden;
 }
 
 li {
