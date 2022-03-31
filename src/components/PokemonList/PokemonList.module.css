@@ -1,0 +1,26 @@
+body {
+  overflow-x: hidden;
+}
+
+li {
+  display: inline-block;
+  width: 33%;
+  margin-bottom: 3em;
+}
+
+@media (min-width: 320px) {
+  li {
+    width: 100% !important;
+  }
+}
+@media (min-width: 961px) {
+  li {
+    width: 50% !important;
+  }
+}
+
+@media (min-width: 1281px) {
+  li {
+    width: 20% !important;
+  }
+}
