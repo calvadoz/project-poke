@@ -22,7 +22,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "heroku-deploy": "git push heroku HEAD:master"
+    "heroku-deploy": "git push heroku HEAD:master",
+    "get:app-version": "heroku config:get HEROKU_RELEASE_VERSION"
+
   },
   "eslintConfig": {
     "extends": [
