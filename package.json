@@ -23,7 +23,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "heroku-deploy": "git push heroku HEAD:master",
-    "get:app-version": "heroku config:get HEROKU_RELEASE_VERSION"
+    "get:app-version": "heroku config:get HEROKU_RELEASE_VERSION",
+    "test:code": "set NODE_ENV=test && echo ${NODE_ENV}"
 
   },
   "eslintConfig": {
