@@ -1,10 +1,12 @@
 import React from "react";
 import classes from "./Footer.module.css";
 
-const Footer = () => {
+const Footer = ({ clientVersion, serverVersion }) => {
   return (
     <footer className={classes.footer}>
-      <span>Calvadoz</span>
+      <span>
+        Client: {clientVersion} Server: {serverVersion}
+      </span>
     </footer>
   );
 };
