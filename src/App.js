@@ -30,7 +30,10 @@ function App() {
     const serverVersionReq = await axios.get(`${apiUrl}api/get-version`);
     let sVersion = serverVersionReq.data;
     console.log("SERVER VERSION: ", sVersion);
-    console.log("process.env.REACT_APP_SERVER_VERSION ", process.env.REACT_APP_SERVER_VERSION);
+    console.log(
+      "process.env.REACT_APP_SERVER_VERSION ",
+      process.env.REACT_APP_SERVER_VERSION
+    );
     sVersion =
       sVersion === "development"
         ? sVersion

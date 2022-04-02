@@ -4,9 +4,7 @@ import classes from "./Footer.module.css";
 const Footer = ({ clientVersion, serverVersion }) => {
   return (
     <footer className={classes.footer}>
-      <span>
-        Client: {clientVersion} Server: {serverVersion}
-      </span>
+      <span>Version: {serverVersion}</span>
     </footer>
   );
 };
