@@ -10,6 +10,7 @@ function App() {
   const [clientVersion, setClientVersion] = useState("");
   const [serverVersion, setServerVersion] = useState("");
 
+  console.log("HEROKU RELEASE VERSION: ", process.env.HEROKU_RELEASE_VERSION);
   const apiUrl =
     process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
@@ -28,6 +29,7 @@ function App() {
   const getServerVersion = useCallback(async () => {
     const serverVersionReq = await axios.get(`${apiUrl}api/get-version`);
     let sVersion = serverVersionReq.data;
+    console.log("SERVER VERSION: ", sVersion);
     sVersion =
       sVersion === "development"
         ? sVersion
