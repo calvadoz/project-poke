@@ -51,14 +51,16 @@ function Summon() {
   };
 
   const setOverlay = (result) => {
-    if (result.filter((r) => r.rarity === "UR").length > 0) {
+    if (result.filter((r) => r.rarity === "SP").length > 0) {
+      setSparks("hasSP");
+    } else if (result.filter((r) => r.rarity === "UR").length > 0) {
       setSparks("hasUR");
     } else if (result.filter((r) => r.rarity === "SSR").length > 0) {
       setSparks("hasSSR");
     } else if (result.filter((r) => r.rarity === "SR").length > 0) {
       setSparks("hasSR");
     } else {
-      setSparks(null);
+      setSparks("");
     }
   };
 
@@ -108,6 +110,11 @@ function Summon() {
         />
         <AsyncImage
           src={`${apiUrl}static/masterball.png`}
+          width="0"
+          height="0"
+        />
+        <AsyncImage
+          src={`${apiUrl}static/premierball.png`}
           width="0"
           height="0"
         />

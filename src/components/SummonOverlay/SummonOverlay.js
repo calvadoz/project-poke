@@ -8,6 +8,9 @@ const SummonOverlay = (props) => {
   const particles = [...Array(PARTICLE_NUMBERS)];
   let overlayClass = "";
   switch (sparks) {
+    case "hasSP":
+      overlayClass = classes["color-sp"];
+      break;
     case "hasUR":
       overlayClass = classes["color-ur"];
       break;

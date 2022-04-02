@@ -8,7 +8,7 @@ li {
   margin-bottom: 3em;
 }
 
-@media (min-width: 320px) {
+/* @media (min-width: 320px) {
   li {
     width: 100% !important;
   }
@@ -17,10 +17,10 @@ li {
   li {
     width: 50% !important;
   }
-}
+} */
 
 @media (min-width: 1281px) {
   li {
-    width: 20% !important;
+    width: 30% !important;
   }
 }

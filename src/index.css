@@ -27,17 +27,43 @@ li {
 }
 
 img.imageList {
-  width: 40%;
+  width: 35%;
 }
 
 span.pokemon-name {
   font-size: 20px;
   font-weight: bold;
-  color: #ededed;
+  color: #ececec;
   position: relative;
   padding: 0.4em 0.8em;
-  top: 8px;
+  top: 16px;
   border-radius: 20px;
+}
+
+@media (min-width: 320px) {
+  span.pokemon-name {
+    font-size: 14px;
+  }
+  img.imageList {
+    width: 75%;
+  }
+}
+@media (min-width: 961px) {
+  span.pokemon-name {
+    font-size: 16px;
+  }
+  img.imageList {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1281px) {
+  span.pokemon-name {
+    font-size: 20px;
+  }
+  img.imageList {
+    width: 35%;
+  }
 }
 
 span.pokemon-name.pokemon-rarity-r {
@@ -54,6 +80,10 @@ span.pokemon-name.pokemon-rarity-ssr {
 
 span.pokemon-name.pokemon-rarity-ur {
   background: #ce484f;
+}
+
+span.pokemon-name.pokemon-rarity-sp {
+  background: #d7bc43;
 }
 
 span.pokemon-rarity {

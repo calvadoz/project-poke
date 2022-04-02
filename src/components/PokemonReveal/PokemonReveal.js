@@ -25,7 +25,7 @@ const PokemonReveal = (props) => {
           style={{ textTransform: "capitalize" }}
           className={`pokemon-name pokemon-rarity-${pokemon.rarity.toLowerCase()}`}
         >
-          {pokemon.name}
+          {pokemon.name.replace("shiny-", "")}
         </span>
         {/* <span
           className={`pokemon-rarity pokemon-rarity-${pokemon.rarity.toLowerCase()}`}

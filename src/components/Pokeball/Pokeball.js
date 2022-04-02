@@ -15,6 +15,16 @@ const Pokeball = (props) => {
 
   return (
     <React.Fragment>
+      {rarity === "SP" && (
+        <div className={classes["pokeball-wrapper-SP"]}>
+          <PokeImage
+            onClick={onOpenSingleHandler}
+            classes="imageList"
+            imageUrl={`${apiUrl}static/premierball.png`}
+            alt="Premierball"
+          />
+        </div>
+      )}
       {rarity === "UR" && (
         <div className={classes["pokeball-wrapper-UR"]}>
           <PokeImage

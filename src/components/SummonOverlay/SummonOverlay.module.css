@@ -6858,6 +6858,10 @@
   background-image: radial-gradient(#ce484f 0%, rgba(203, 93, 96, 0.9) 10%);
   box-shadow: 0 0 0.9375em 0.1875em #952235;
 }
+.ag-fireflies_inner.color-sp {
+  background-image: radial-gradient(#ffdf4f 0%, rgb(246, 243, 40) 10%);
+  box-shadow: 0 0 0.9375em 0.1875em #dde418;
+}
 
 @-webkit-keyframes an-scale-frames {
   0% {

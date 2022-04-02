@@ -26,13 +26,7 @@ const PokeballCatch = (props) => {
   }, [summoningState, isSummoning, sparks]);
 
   let summonOverlayClass = "";
-  if (currSummoningState === "done" && sparks === null) {
-    summonOverlayClass = <SummonOverlay sparks={sparks} />;
-  } else if (currSummoningState === "done" && sparks === "hasUR") {
-    summonOverlayClass = <SummonOverlay sparks={sparks} />;
-  } else if (currSummoningState === "done" && sparks === "hasSSR") {
-    summonOverlayClass = <SummonOverlay sparks={sparks} />;
-  } else if (currSummoningState === "done" && sparks === "hasSR") {
+  if (currSummoningState === "done") {
     summonOverlayClass = <SummonOverlay sparks={sparks} />;
   }
 
