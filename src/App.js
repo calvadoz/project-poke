@@ -10,42 +10,39 @@ function App() {
   const [clientVersion, setClientVersion] = useState("");
   const [serverVersion, setServerVersion] = useState("");
 
-  console.log("HEROKU RELEASE VERSION: ", process.env.HEROKU_RELEASE_VERSION);
+  console.log("REACT_APP_TEST ", process.env.REACT_APP_TEST);
+
   const apiUrl =
     process.env.REACT_APP_ENVIRONMENT === "production"
       ? process.env.REACT_APP_HEROKU_PROJECT_URL
       : process.env.REACT_APP_LOCAL_PROJECT_URL;
 
-  const getClientVersion = () => {
-    const cVersion = process.env.HEROKU_RELEASE_VERSION
-      ? process.env.REACT_APP_CLIENT_VERSION.replace(
-          "x",
-          process.env.HEROKU_RELEASE_VERSION.replace("v", "")
-        )
-      : "development";
-    setClientVersion(cVersion);
-  };
+  // const getClientVersion = () => {
+  //   const cVersion = process.env.HEROKU_RELEASE_VERSION
+  //     ? process.env.REACT_APP_CLIENT_VERSION.replace(
+  //         "x",
+  //         process.env.HEROKU_RELEASE_VERSION.replace("v", "")
+  //       )
+  //     : "development";
+  //   setClientVersion(cVersion);
+  // };
 
   const getServerVersion = useCallback(async () => {
     const serverVersionReq = await axios.get(`${apiUrl}api/get-version`);
     let sVersion = serverVersionReq.data;
-    console.log("SERVER VERSION: ", sVersion);
-    console.log(
-      "process.env.REACT_APP_SERVER_VERSION ",
-      process.env.REACT_APP_SERVER_VERSION
-    );
+
     sVersion =
       sVersion === "development"
         ? sVersion
         : process.env.REACT_APP_SERVER_VERSION.replace(
             "x",
-            process.env.HEROKU_RELEASE_VERSION.replace("v", "")
+            sVersion.replace("v", "")
           );
     setServerVersion(sVersion);
   }, [apiUrl]);
 
   useEffect(() => {
-    getClientVersion();
+    // getClientVersion();
     getServerVersion();
   }, [getServerVersion]);
 
