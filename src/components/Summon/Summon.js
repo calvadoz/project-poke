@@ -4,28 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { motion, AnimatePresence } from "framer-motion";
 import PokeballCatch from "../PokeballCatch/PokeballCatch";
 import PokemonList from "../PokemonList/PokemonList";
-
-const AsyncImage = (props) => {
-  const [loadedSrc, setLoadedSrc] = useState(null);
-  useEffect(() => {
-    setLoadedSrc(null);
-    if (props.src) {
-      const handleLoad = () => {
-        setLoadedSrc(props.src);
-      };
-      const image = new Image();
-      image.addEventListener("load", handleLoad);
-      image.src = props.src;
-      return () => {
-        image.removeEventListener("load", handleLoad);
-      };
-    }
-  }, [props.src]);
-  if (loadedSrc === props.src) {
-    return <img {...props} alt="prefetch-img" />;
-  }
-  return null;
-};
+import AsyncImage from "../AsyncImage/AsyncImage";
 
 function Summon() {
   const apiUrl =
@@ -96,29 +75,6 @@ function Summon() {
         summoningState === "clear" ? classes.clear : classes.preparing
       }`}
     >
-      <div style={{ display: "none" }}>
-        <AsyncImage src={`${apiUrl}static/pokeball.png`} width="0" height="0" />
-        <AsyncImage
-          src={`${apiUrl}static/greatball.png`}
-          width="0"
-          height="0"
-        />
-        <AsyncImage
-          src={`${apiUrl}static/ultraball.png`}
-          width="0"
-          height="0"
-        />
-        <AsyncImage
-          src={`${apiUrl}static/masterball.png`}
-          width="0"
-          height="0"
-        />
-        <AsyncImage
-          src={`${apiUrl}static/premierball.png`}
-          width="0"
-          height="0"
-        />
-      </div>
       <PokeballCatch
         onClick={catchButtonHandler}
         onOpenAll={onOpenAllHandler}
