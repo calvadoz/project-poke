@@ -23,6 +23,8 @@ const pokeballs = [
   "premierball",
 ];
 
+const banners = ["GEN1-banner", "GEN2-banner", "GEN3-banner", "ALLGEN-banner"];
+
 function App() {
   const location = useLocation();
   const usernameRef = useRef();
@@ -55,6 +57,9 @@ function App() {
     pokeballs.forEach((pokeball) =>
       allResources.unshift({ name: pokeball, id: pokeball })
     );
+    banners.forEach((banner) => {
+      allResources.unshift({ name: banner, id: banner });
+    });
 
     allResources.forEach(async (resource, index) => {
       const url = `${apiUrl}static/${resource.name}.png`;
@@ -74,8 +79,7 @@ function App() {
   const loginHandler = () => {
     const usernameInput = usernameRef.current.value;
     const passwordInput = passwordRef.current.value;
-    console.log("Username: ", usernameInput);
-    console.log("Password: ", passwordInput);
+
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
@@ -86,9 +90,6 @@ function App() {
     const usernameInput = usernameRef.current.value;
     const passwordInput = passwordRef.current.value;
     const confirmPasswordInput = confirmPasswordRef.current.value;
-    console.log("Username: ", usernameInput);
-    console.log("Password: ", passwordInput);
-    console.log("Confirm Password: ", confirmPasswordInput);
   };
 
   const formSubmitHandler = (e) => {
@@ -104,138 +105,134 @@ function App() {
 
   return (
     <React.Fragment>
-      <AnimatePresence exitBeforeEnter>
-        {isLoadingResource && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, transition: { duration: 1, delay: 0.2 } }}
-            exit={{ opacity: 0, x: "-100vw", transition: { duration: 2 } }}
-          >
-            <ResourceLoader progress={progress} />
-          </motion.div>
-        )}
-        {!isLoadingResource && !startGame && (
-          <motion.div
-            variants={fadeInAnimations}
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            className="start-game-wrapper"
-          >
-            <form onSubmit={formSubmitHandler}>
-              <AnimatePresence exitBeforeEnter>
-                {!isNewUser && (
-                  <motion.div
-                    initial={{ opacity: 0, rotateY: -180 }}
-                    animate={{
-                      opacity: 1,
-                      rotateY: 0,
-                      transition: { duration: 0.5, ease: "easeInOut" },
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="login-signup-wrapper"
+      {isLoadingResource && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1, transition: { duration: 1, delay: 0.2 } }}
+          exit={{ opacity: 0, x: "-100vw", transition: { duration: 2 } }}
+        >
+          <ResourceLoader progress={progress} />
+        </motion.div>
+      )}
+      {!isLoadingResource && !startGame && (
+        <motion.div
+          variants={fadeInAnimations}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+          className="start-game-wrapper"
+        >
+          <form onSubmit={formSubmitHandler}>
+            {!isNewUser && (
+              <motion.div
+                initial={{ opacity: 0, rotateY: -180 }}
+                animate={{
+                  opacity: 1,
+                  rotateY: 0,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+                exit={{ opacity: 0 }}
+                className="login-signup-wrapper"
+              >
+                <motion.div
+                  variants={fadeInAnimations}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <motion.h3>Continue Journey</motion.h3>
+                  <motion.input
+                    autoFocus
+                    ref={usernameRef}
+                    type="text"
+                    placeholder="Username"
+                  />
+                  <motion.input
+                    ref={passwordRef}
+                    type="password"
+                    placeholder="Password"
+                  />
+                  <motion.button
+                    disabled={isLoading}
+                    type="submit"
+                    className="login-button"
                   >
-                    <motion.div
-                      variants={fadeInAnimations}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <motion.h3>Continue Journey</motion.h3>
-                      <motion.input
-                        autoFocus
-                        ref={usernameRef}
-                        type="text"
-                        placeholder="Username"
-                      />
-                      <motion.input
-                        ref={passwordRef}
-                        type="password"
-                        placeholder="Password"
-                      />
-                      <motion.button
-                        disabled={isLoading}
-                        type="submit"
-                        className="login-button"
-                      >
-                        Login
-                      </motion.button>
-                      <motion.button
-                        className="button-link"
-                        onClick={() => setIsNewUser(true)}
-                      >
-                        No account yet? Register now
-                      </motion.button>
-                    </motion.div>
-                  </motion.div>
-                )}
+                    Login
+                  </motion.button>
+                  <motion.button
+                    className="button-link"
+                    onClick={() => setIsNewUser(true)}
+                  >
+                    No account yet? Register now
+                  </motion.button>
+                </motion.div>
+              </motion.div>
+            )}
 
-                {isNewUser && (
-                  <motion.div
-                    initial={{ opacity: 0, rotateY: 180 }}
-                    animate={{
-                      opacity: 1,
-                      rotateY: 0,
-                      transition: { duration: 0.5, ease: "easeInOut" },
-                    }}
-                    exit={{ opacity: 0 }}
-                    className="login-signup-wrapper"
+            {isNewUser && (
+              <motion.div
+                initial={{ opacity: 0, rotateY: 180 }}
+                animate={{
+                  opacity: 1,
+                  rotateY: 0,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+                exit={{ opacity: 0 }}
+                className="login-signup-wrapper"
+              >
+                <motion.div
+                  variants={fadeInAnimations}
+                  initial="hidden"
+                  animate="visible"
+                >
+                  <h3>Create New Account</h3>
+                  <input
+                    autoFocus
+                    ref={usernameRef}
+                    type="text"
+                    placeholder="Username"
+                  />
+                  <input
+                    ref={passwordRef}
+                    type="password"
+                    placeholder="Password"
+                  />
+                  <input
+                    ref={confirmPasswordRef}
+                    type="password"
+                    placeholder="Confirm Password"
+                  />
+                  <button
+                    type="submit"
+                    className="sign-up-button"
+                    disabled={isLoading}
                   >
-                    <motion.div
-                      variants={fadeInAnimations}
-                      initial="hidden"
-                      animate="visible"
-                    >
-                      <h3>Create New Account</h3>
-                      <input
-                        autoFocus
-                        ref={usernameRef}
-                        type="text"
-                        placeholder="Username"
-                      />
-                      <input
-                        ref={passwordRef}
-                        type="password"
-                        placeholder="Password"
-                      />
-                      <input
-                        ref={confirmPasswordRef}
-                        type="password"
-                        placeholder="Confirm Password"
-                      />
-                      <button
-                        type="submit"
-                        className="sign-up-button"
-                        disabled={isLoading}
-                      >
-                        Sign Up
-                      </button>
-                      <button
-                        className="button-link"
-                        onClick={() => setIsNewUser(false)}
-                      >
-                        ← Back to Login
-                      </button>
-                    </motion.div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </form>
-          </motion.div>
-        )}
-        {!isLoadingResource && startGame && (
-          <>
-            <Header />
-            <div className="main-wrapper">
-              <Routes location={location} key={location.key}>
-                <Route path="/summon" element={<Summon />} />
-                <Route path="/" element={<Home />} />
-                <Route path="*" element={<Home />} />
-              </Routes>
-            </div>
-            <Footer serverVersion={serverVersion} />
-          </>
-        )}
-      </AnimatePresence>
+                    Sign Up
+                  </button>
+                  <button
+                    className="button-link"
+                    onClick={() => setIsNewUser(false)}
+                  >
+                    ← Back to Login
+                  </button>
+                </motion.div>
+              </motion.div>
+            )}
+          </form>
+        </motion.div>
+      )}
+      {!isLoadingResource && startGame && (
+        <>
+          <Header />
+          <div className="main-wrapper">
+            <Routes location={location} key={location.key}>
+              <Route path="/summon" element={<Summon />} />
+              <Route path="/" element={<Home banners={banners} />} />
+              <Route path="*" element={<Home banners={banners} />} />
+            </Routes>
+          </div>
+          <Footer serverVersion={serverVersion} />
+        </>
+      )}
     </React.Fragment>
   );
 }
