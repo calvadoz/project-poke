@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Summon from "./components/Summon/Summon";
 import Footer from "./components/Footer/Footer";
@@ -7,6 +7,8 @@ import Home from "./components/Home/Home";
 import axios from "axios";
 import ResourceLoader from "./components/ResourceLoader/ResourceLoader";
 import { motion, AnimatePresence } from "framer-motion";
+import { fadeInAnimations } from "./components/Animations/fadeIn";
+import Spinner from "./components/Spinner/Spinner";
 
 const apiUrl =
   process.env.REACT_APP_ENVIRONMENT === "production"
@@ -22,10 +24,16 @@ const pokeballs = [
 ];
 
 function App() {
+  const location = useLocation();
+  const usernameRef = useRef();
+  const passwordRef = useRef();
+  const confirmPasswordRef = useRef();
   const [serverVersion, setServerVersion] = useState("");
   const [isLoadingResource, setIsLoadingResource] = useState(true);
   const [progress, setProgress] = useState(0);
   const [startGame, setStartGame] = useState(false);
+  const [isNewUser, setIsNewUser] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const getServerVersion = useCallback(async () => {
     const serverVersionReq = await axios.get(`${apiUrl}api/get-version`);
@@ -63,6 +71,32 @@ function App() {
     });
   }, []);
 
+  const loginHandler = () => {
+    const usernameInput = usernameRef.current.value;
+    const passwordInput = passwordRef.current.value;
+    console.log("Username: ", usernameInput);
+    console.log("Password: ", passwordInput);
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setStartGame(true);
+    }, 3000);
+  };
+  const signUpHandler = () => {
+    const usernameInput = usernameRef.current.value;
+    const passwordInput = passwordRef.current.value;
+    const confirmPasswordInput = confirmPasswordRef.current.value;
+    console.log("Username: ", usernameInput);
+    console.log("Password: ", passwordInput);
+    console.log("Confirm Password: ", confirmPasswordInput);
+  };
+
+  const formSubmitHandler = (e) => {
+    e.preventDefault();
+    if (isNewUser) signUpHandler();
+    else loginHandler();
+  };
+
   useEffect(() => {
     getServerVersion();
     setTimeout(() => fetchAllResources(), 2000);
@@ -80,33 +114,128 @@ function App() {
             <ResourceLoader progress={progress} />
           </motion.div>
         )}
+        {!isLoadingResource && !startGame && (
+          <motion.div
+            variants={fadeInAnimations}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            className="start-game-wrapper"
+          >
+            <form onSubmit={formSubmitHandler}>
+              <AnimatePresence exitBeforeEnter>
+                {!isNewUser && (
+                  <motion.div
+                    initial={{ opacity: 0, rotateY: -180 }}
+                    animate={{
+                      opacity: 1,
+                      rotateY: 0,
+                      transition: { duration: 0.5, ease: "easeInOut" },
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="login-signup-wrapper"
+                  >
+                    <motion.div
+                      variants={fadeInAnimations}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      <motion.h3>Continue Journey</motion.h3>
+                      <motion.input
+                        autoFocus
+                        ref={usernameRef}
+                        type="text"
+                        placeholder="Username"
+                      />
+                      <motion.input
+                        ref={passwordRef}
+                        type="password"
+                        placeholder="Password"
+                      />
+                      <motion.button
+                        disabled={isLoading}
+                        type="submit"
+                        className="login-button"
+                      >
+                        Login
+                      </motion.button>
+                      <motion.button
+                        className="button-link"
+                        onClick={() => setIsNewUser(true)}
+                      >
+                        No account yet? Register now
+                      </motion.button>
+                    </motion.div>
+                  </motion.div>
+                )}
+
+                {isNewUser && (
+                  <motion.div
+                    initial={{ opacity: 0, rotateY: 180 }}
+                    animate={{
+                      opacity: 1,
+                      rotateY: 0,
+                      transition: { duration: 0.5, ease: "easeInOut" },
+                    }}
+                    exit={{ opacity: 0 }}
+                    className="login-signup-wrapper"
+                  >
+                    <motion.div
+                      variants={fadeInAnimations}
+                      initial="hidden"
+                      animate="visible"
+                    >
+                      <h3>Create New Account</h3>
+                      <input
+                        autoFocus
+                        ref={usernameRef}
+                        type="text"
+                        placeholder="Username"
+                      />
+                      <input
+                        ref={passwordRef}
+                        type="password"
+                        placeholder="Password"
+                      />
+                      <input
+                        ref={confirmPasswordRef}
+                        type="password"
+                        placeholder="Confirm Password"
+                      />
+                      <button
+                        type="submit"
+                        className="sign-up-button"
+                        disabled={isLoading}
+                      >
+                        Sign Up
+                      </button>
+                      <button
+                        className="button-link"
+                        onClick={() => setIsNewUser(false)}
+                      >
+                        ← Back to Login
+                      </button>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </form>
+          </motion.div>
+        )}
+        {!isLoadingResource && startGame && (
+          <>
+            <Header />
+            <div className="main-wrapper">
+              <Routes location={location} key={location.key}>
+                <Route path="/summon" element={<Summon />} />
+                <Route path="/" element={<Home />} />
+                <Route path="*" element={<Home />} />
+              </Routes>
+            </div>
+            <Footer serverVersion={serverVersion} />
+          </>
+        )}
       </AnimatePresence>
-      {!isLoadingResource && !startGame && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{
-            opacity: 1,
-            scale: 1.5,
-            transition: { duration: 2, delay: 0.5 },
-          }}
-          className="start-game-wrapper"
-        >
-          <button onClick={() => setStartGame(!startGame)}>Start Game</button>
-        </motion.div>
-      )}
-      {!isLoadingResource && startGame && (
-        <>
-          <Header />
-          <div className="main-wrapper">
-            <Routes>
-              <Route path="/summon" element={<Summon />} />
-              <Route path="/" element={<Home />} />
-              <Route path="*" element={<Home />} />
-            </Routes>
-          </div>
-          <Footer serverVersion={serverVersion} />
-        </>
-      )}
     </React.Fragment>
   );
 }

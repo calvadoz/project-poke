@@ -18,7 +18,7 @@ const ResourceLoader = ({ progress }) => {
           exit={{ opacity: 0, x: "-100vw", transition: { duration: 2 } }}
           className={classes["loader-container"]}
         >
-          <p>Loading resources for the first time, it may take some time...</p>
+          <p>Loading resources, it may take some time...</p>
           {progress > 0 && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <ProgressBar progress={progress} />

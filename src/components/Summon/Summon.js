@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import PokeballCatch from "../PokeballCatch/PokeballCatch";
 import PokemonList from "../PokemonList/PokemonList";
 import AsyncImage from "../AsyncImage/AsyncImage";
+import { fadeInAnimations } from "./../Animations/fadeIn";
 
 function Summon() {
   const apiUrl =
@@ -70,7 +71,11 @@ function Summon() {
   };
 
   return (
-    <div
+    <motion.div
+      variants={fadeInAnimations}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
       className={`${classes.wrapper} ${
         summoningState === "clear" ? classes.clear : classes.preparing
       }`}
@@ -99,7 +104,7 @@ function Summon() {
             ))}
         </ul>
       )}
-    </div>
+    </motion.div>
   );
 }
 

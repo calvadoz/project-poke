@@ -1,0 +1,14 @@
+.summon-banner-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  height: calc(100vh - 60px);
+}
+
+.summon-banner-container {
+  width: 600px;
+  height: 200px;
+  background: white;
+}
