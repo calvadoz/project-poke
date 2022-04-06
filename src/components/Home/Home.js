@@ -5,6 +5,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee } from "@fortawesome/free-solid-svg-icons";
 import { fadeInAnimations } from "./../Animations/fadeIn";
 import { motion } from "framer-motion";
+import PokeImage from "./../PokeImage/PokeImage";
+
+const apiUrl =
+  process.env.REACT_APP_ENVIRONMENT === "production"
+    ? process.env.REACT_APP_HEROKU_PROJECT_URL
+    : process.env.REACT_APP_LOCAL_PROJECT_URL;
 
 const Home = ({ banners }) => {
   return (
@@ -15,9 +21,12 @@ const Home = ({ banners }) => {
     >
       {banners.length > 0 &&
         banners.map((banner) => (
-          <Link to="/summon">
+          <Link key={banner} to="/summon">
             <motion.div className={classes["summon-banner-container"]}>
-              {banner}
+              <PokeImage
+                onClick={() => null}
+                imageUrl={`${apiUrl}static/${banner}.png`}
+              />
             </motion.div>
           </Link>
         ))}
