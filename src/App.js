@@ -8,7 +8,7 @@ import axios from "axios";
 import ResourceLoader from "./components/ResourceLoader/ResourceLoader";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeInAnimations } from "./components/Animations/fadeIn";
-import Spinner from "./components/Spinner/Spinner";
+import Logo from "./components/Logo/Logo";
 
 const apiUrl =
   process.env.REACT_APP_ENVIRONMENT === "production"
@@ -139,9 +139,8 @@ function App() {
                   initial="hidden"
                   animate="visible"
                 >
-                  <motion.h3>Continue Journey</motion.h3>
+                  {<Logo />}
                   <motion.input
-                    autoFocus
                     ref={usernameRef}
                     type="text"
                     placeholder="Username"
@@ -184,9 +183,8 @@ function App() {
                   initial="hidden"
                   animate="visible"
                 >
-                  <h3>Create New Account</h3>
+                  <Logo />
                   <input
-                    autoFocus
                     ref={usernameRef}
                     type="text"
                     placeholder="Username"
