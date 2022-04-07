@@ -6,9 +6,17 @@ import Footer from "./components/Footer/Footer";
 import Home from "./components/Home/Home";
 import axios from "axios";
 import ResourceLoader from "./components/ResourceLoader/ResourceLoader";
-import { motion, AnimatePresence } from "framer-motion";
-import { fadeInAnimations } from "./components/Animations/fadeIn";
+import { motion } from "framer-motion";
 import Logo from "./components/Logo/Logo";
+import { fadeInAnimations } from "./components/Animations/Animation";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer } from "react-toastify";
+import {
+  showError,
+  showInfo,
+  showSuccess,
+  showWarning,
+} from "./components/ToastHelper/ToastHelper";
 
 const apiUrl =
   process.env.REACT_APP_ENVIRONMENT === "production"
@@ -83,13 +91,22 @@ function App() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      setStartGame(true);
+      showError("Invalid Username / Password !");
+      showInfo("Invalid Username / Password !");
+      showWarning("Invalid Username / Password !");
+      showSuccess("Invalid Username / Password !");
+      // setStartGame(true);
     }, 3000);
   };
   const signUpHandler = () => {
     const usernameInput = usernameRef.current.value;
     const passwordInput = passwordRef.current.value;
     const confirmPasswordInput = confirmPasswordRef.current.value;
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      setStartGame(true);
+    }, 3000);
   };
 
   const formSubmitHandler = (e) => {
@@ -105,6 +122,7 @@ function App() {
 
   return (
     <React.Fragment>
+      <ToastContainer />
       {isLoadingResource && (
         <motion.div
           initial={{ opacity: 0 }}
@@ -155,7 +173,17 @@ function App() {
                     type="submit"
                     className="login-button"
                   >
-                    Login
+                    {isLoading ? (
+                      <>
+                        Logging in
+                        <FontAwesomeIcon
+                          className="login-icon fa-spin"
+                          icon={["fas", "circle-notch"]}
+                        />
+                      </>
+                    ) : (
+                      "Login"
+                    )}
                   </motion.button>
                   <motion.button
                     className="button-link"
@@ -184,11 +212,7 @@ function App() {
                   animate="visible"
                 >
                   <Logo />
-                  <input
-                    ref={usernameRef}
-                    type="text"
-                    placeholder="Username"
-                  />
+                  <input ref={usernameRef} type="text" placeholder="Username" />
                   <input
                     ref={passwordRef}
                     type="password"
@@ -204,7 +228,17 @@ function App() {
                     className="sign-up-button"
                     disabled={isLoading}
                   >
-                    Sign Up
+                    {isLoading ? (
+                      <>
+                        Creating
+                        <FontAwesomeIcon
+                          className="login-icon fa-spin"
+                          icon={["fas", "circle-notch"]}
+                        />
+                      </>
+                    ) : (
+                      "Sign Up"
+                    )}
                   </button>
                   <button
                     className="button-link"

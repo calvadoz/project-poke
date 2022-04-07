@@ -1,26 +1,43 @@
 import { motion } from "framer-motion";
 import React from "react";
+import {
+  fadeInAnimationsWithDelay,
+  pathAnimations,
+} from "../Animations/Animation";
 
 const Logo = () => {
   return (
-    <svg
+    <motion.svg
       version="1.2"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 250 250"
       width="100"
       height="100"
       style={{ fill: "#12267e" }}
+      variants={fadeInAnimationsWithDelay}
+      initial="hidden"
+      animate="visible"
+      className="logo-svg"
     >
-      <title>calvadoz-split-ai</title>
+      <title>Logo</title>
       <defs>
         <clipPath clipPathUnits="userSpaceOnUse" id="cp1">
-          <path d="m228.96 149.02l-41.43 71.75h-55.49-55.5l-55.5-96.12 27.36-47.37h56.28l-28.14-48.75h110.99l28.14 48.75h-56.28-54.71l-27.35 47.37 54.71 96.12 40.83-71.75z" />
+          <motion.path
+            variants={pathAnimations}
+            d="m228.96 149.02l-41.43 71.75h-55.49-55.5l-55.5-96.12 27.36-47.37h56.28l-28.14-48.75h110.99l28.14 48.75h-56.28-54.71l-27.35 47.37 54.71 96.12 40.83-71.75z"
+          />
         </clipPath>
         <clipPath clipPathUnits="userSpaceOnUse" id="cp2">
-          <path d="m228.96 149.02l-41.43 71.75h-55.49-55.5l-55.5-96.12 27.36-47.37h56.28l-28.14-48.75h110.99l28.14 48.75h-56.28-54.71l-27.35 47.37 54.71 96.12 40.83-71.75z" />
+          <motion.path
+            variants={pathAnimations}
+            d="m228.96 149.02l-41.43 71.75h-55.49-55.5l-55.5-96.12 27.36-47.37h56.28l-28.14-48.75h110.99l28.14 48.75h-56.28-54.71l-27.35 47.37 54.71 96.12 40.83-71.75z"
+          />
         </clipPath>
         <clipPath clipPathUnits="userSpaceOnUse" id="cp3">
-          <path d="m228.96 149.02l-41.43 71.75h-55.49-55.5l-55.5-96.12 27.36-47.37h56.28l-28.14-48.75h110.99l28.14 48.75h-56.28-54.71l-27.35 47.37 54.71 96.12 40.83-71.75z" />
+          <motion.path
+            variants={pathAnimations}
+            d="m228.96 149.02l-41.43 71.75h-55.49-55.5l-55.5-96.12 27.36-47.37h56.28l-28.14-48.75h110.99l28.14 48.75h-56.28-54.71l-27.35 47.37 54.71 96.12 40.83-71.75z"
+          />
         </clipPath>
       </defs>
       <g id="Layer 1">
@@ -28,12 +45,14 @@ const Logo = () => {
           <g id="&lt;Group&gt;">
             <g id="&lt;Clip Group&gt;" clipPath="url(#cp1)"></g>
             <g id="&lt;Clip Group&gt;" clipPath="url(#cp2)">
-              <path
+              <motion.path
+                variants={pathAnimations}
                 id="&lt;Path&gt;"
                 className="s0"
                 d="m21 28.5h208v192.3h-208z"
               />
-              <path
+              <motion.path
+                variants={pathAnimations}
                 id="&lt;Path&gt;"
                 className="s0"
                 d="m229 149l-41.5 71.8h-55.5-55.5l-55.5-96.1 27.4-47.4h56.3l-28.2-48.8h111l28.2 48.8h-56.3-54.7l-27.4 47.4 54.7 96.1 40.9-71.8z"
@@ -176,7 +195,7 @@ const Logo = () => {
           </g>
         </g>
       </g>
-    </svg>
+    </motion.svg>
   );
 };
 

@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useCallback } from "react";
 import classes from "./Summon.module.css";
 import { v4 as uuidv4 } from "uuid";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import PokeballCatch from "../PokeballCatch/PokeballCatch";
 import PokemonList from "../PokemonList/PokemonList";
-import AsyncImage from "../AsyncImage/AsyncImage";
-import { fadeInAnimations } from "./../Animations/fadeIn";
+import { fadeInAnimations } from "../Animations/Animation";
 
 function Summon() {
   const apiUrl =

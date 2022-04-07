@@ -1,4 +1,6 @@
 @import-normalize;
+@import "react-toastify/dist/ReactToastify.css";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -225,6 +227,11 @@ span.pokemon-rarity.pokemon-rarity-ur {
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: all 0.3s ease;
+}
+
+.login-button .login-icon,
+.sign-up-button .login-icon {
+  margin-left: 12px;
 }
 
 .login-button:disabled,
