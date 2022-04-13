@@ -254,7 +254,7 @@ function App() {
       )}
       {!isLoadingResource && startGame && (
         <>
-          <Header />
+          {/* <Header /> */}
           <div className="main-wrapper">
             <Routes location={location} key={location.key}>
               <Route path="/summon" element={<Summon />} />

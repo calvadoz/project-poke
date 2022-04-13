@@ -41,7 +41,7 @@ code {
 }
 
 .main-wrapper {
-  height: calc(100vh - 60px);
+  height: calc(100vh - 20px);
   flex: auto;
   background-color: #ccc;
   overflow-x: hidden;
