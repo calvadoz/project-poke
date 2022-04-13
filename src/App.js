@@ -91,11 +91,11 @@ function App() {
     setIsLoading(true);
     setTimeout(() => {
       setIsLoading(false);
-      showError("Invalid Username / Password !");
-      showInfo("Invalid Username / Password !");
-      showWarning("Invalid Username / Password !");
-      showSuccess("Invalid Username / Password !");
-      // setStartGame(true);
+      // showError("Invalid Username / Password !");
+      // showInfo("Invalid Username / Password !");
+      // showWarning("Invalid Username / Password !");
+      // showSuccess("Invalid Username / Password !");
+      setStartGame(true);
     }, 3000);
   };
   const signUpHandler = () => {
